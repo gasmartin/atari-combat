@@ -1,20 +1,14 @@
 import turtle
 
-playing = True
+from game_modules import objects
 
-def create_screen(title, width, height):
-    screen = turtle.Screen()
-    screen.title(title)
-    screen.bgcolor("#73b850")
-    screen.setup(width=width, height=height)
-    screen.tracer(0)
-    return screen
+playing = True
 
 def close_screen():
     global playing
-    playing = not playing
+    playing = False
 
-screen = create_screen("Atari Combat", 1000, 800)
+screen = objects.create_screen("Atari Combat", 1000, 800)
 root = screen.getcanvas().winfo_toplevel()
 root.protocol("WM_DELETE_WINDOW", close_screen)
 
