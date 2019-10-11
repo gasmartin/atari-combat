@@ -1,6 +1,6 @@
 import turtle
 
-from game_modules import objects, physics, utils
+from game_modules import objects, physics, sounds, utils
 
 playing = True
 
@@ -32,9 +32,9 @@ capitalist_angle = 180
 
 def communist_turn_left():
     global communist_angle
-    communist_angle += 30
-    communist.left(30)
-    communist_hitbox.left(30)
+    communist_angle += 22.5
+    communist.left(22.5)
+    communist_hitbox.left(22.5)
     physics.calculate_angle(communist_hitbox, communist_angle)
 
 def communist_move():
@@ -44,16 +44,16 @@ def communist_move():
 
 def communist_turn_right():
     global communist_angle
-    communist_angle -= 30
-    communist.right(30)
-    communist_hitbox.right(30)
+    communist_angle -= 22.5
+    communist.right(22.5)
+    communist_hitbox.right(22.5)
     physics.calculate_angle(communist_hitbox, communist_angle)
 
 def capitalist_turn_left():
     global capitalist_angle
-    capitalist_angle += 30
-    capitalist.left(30)
-    capitalist_hitbox.left(30)
+    capitalist_angle += 22.5
+    capitalist.left(22.5)
+    capitalist_hitbox.left(22.5)
     physics.calculate_angle(capitalist_hitbox, capitalist_angle)
 
 def capitalist_move():
@@ -63,9 +63,9 @@ def capitalist_move():
 
 def capitalist_turn_right():
     global capitalist_angle
-    capitalist_angle -= 30
-    capitalist.right(30)
-    capitalist_hitbox.right(30)
+    capitalist_angle -= 22.5
+    capitalist.right(22.5)
+    capitalist_hitbox.right(22.5)
     physics.calculate_angle(capitalist_hitbox, capitalist_angle)
 
 screen.listen()
