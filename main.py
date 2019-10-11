@@ -15,37 +15,53 @@ root.protocol("WM_DELETE_WINDOW", close_screen)
 communist_hitbox = objects.create_hitbox(-520, -100, "red")
 capitalist_hitbox = objects.create_hitbox(520, -100, "blue")
 
+communist_hitbox.dx = 5
+communist_hitbox.dy = 0
+
+capitalist_hitbox.dx = -5
+capitalist_hitbox.dy = 0
+
 communist_angle = 0
-capitalist_angle = 0
+capitalist_angle = 180
 
 def communist_turn_left():
     global communist_angle
     communist_angle += 30
-    communist_hitbox.left(communist_angle)
+    communist_hitbox.left(30)
     physics.calculate_angle(communist_hitbox, communist_angle)
+
+def communist_move():
+    x, y = communist_hitbox.xcor(), communist_hitbox.ycor()
+    communist_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
 
 def communist_turn_right():
     global communist_angle
     communist_angle -= 30
-    communist_hitbox.right(communist_angle)
+    communist_hitbox.right(30)
     physics.calculate_angle(communist_hitbox, communist_angle)
 
 def capitalist_turn_left():
     global capitalist_angle
     capitalist_angle += 30
-    capitalist_hitbox.left(capitalist_angle)
-    physics.calculate_angle(capitalist_hitbox, communist_angle)
+    capitalist_hitbox.left(30)
+    physics.calculate_angle(capitalist_hitbox, capitalist_angle)
+
+def capitalist_move():
+    x, y = capitalist_hitbox.xcor(), capitalist_hitbox.ycor()
+    capitalist_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
 
 def capitalist_turn_right():
     global capitalist_angle
     capitalist_angle -= 30
-    capitalist_hitbox.right(capitalist_angle)
-    physics.calculate_angle(capitalist_hitbox, communist_angle)
+    capitalist_hitbox.right(30)
+    physics.calculate_angle(capitalist_hitbox, capitalist_angle)
 
 screen.listen()
 screen.onkeypress(communist_turn_left, "a")
+screen.onkeypress(communist_move, "w")
 screen.onkeypress(communist_turn_right, "d")
 screen.onkeypress(capitalist_turn_left, "Left")
+screen.onkeypress(capitalist_move, "Up")
 screen.onkeypress(capitalist_turn_right, "Right")
 
 while playing:
