@@ -1,6 +1,6 @@
 import turtle
 
-from game_modules import objects, physics
+from game_modules import objects, physics, utils
 
 playing = True
 
@@ -12,8 +12,14 @@ screen = objects.create_screen("Atari Combat", 1300, 900)
 root = screen.getcanvas().winfo_toplevel()
 root.protocol("WM_DELETE_WINDOW", close_screen)
 
-communist_hitbox = objects.create_hitbox(-520, -100, "red")
-capitalist_hitbox = objects.create_hitbox(520, -100, "blue")
+# Criar o shape do tanque comunista
+utils.register_tank_shape(screen, "communist", "red")
+
+# Criar o shape do tanque capitalist
+utils.register_tank_shape(screen, "capitalist", "blue")
+
+communist, communist_hitbox = objects.create_tank(-520, -100, "communist")
+capitalist, capitalist_hitbox = objects.create_tank(520, -100, "capitalist")
 
 communist_hitbox.dx = 5
 communist_hitbox.dy = 0
@@ -27,6 +33,7 @@ capitalist_angle = 180
 def communist_turn_left():
     global communist_angle
     communist_angle += 30
+    communist.left(30)
     communist_hitbox.left(30)
     physics.calculate_angle(communist_hitbox, communist_angle)
 
@@ -37,12 +44,14 @@ def communist_move():
 def communist_turn_right():
     global communist_angle
     communist_angle -= 30
+    communist.right(30)
     communist_hitbox.right(30)
     physics.calculate_angle(communist_hitbox, communist_angle)
 
 def capitalist_turn_left():
     global capitalist_angle
     capitalist_angle += 30
+    capitalist.left(30)
     capitalist_hitbox.left(30)
     physics.calculate_angle(capitalist_hitbox, capitalist_angle)
 
@@ -53,6 +62,7 @@ def capitalist_move():
 def capitalist_turn_right():
     global capitalist_angle
     capitalist_angle -= 30
+    capitalist.right(30)
     capitalist_hitbox.right(30)
     physics.calculate_angle(capitalist_hitbox, capitalist_angle)
 
