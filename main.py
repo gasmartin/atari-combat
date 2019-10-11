@@ -40,6 +40,7 @@ def communist_turn_left():
 def communist_move():
     x, y = communist_hitbox.xcor(), communist_hitbox.ycor()
     communist_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
+    communist.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
 
 def communist_turn_right():
     global communist_angle
@@ -58,6 +59,7 @@ def capitalist_turn_left():
 def capitalist_move():
     x, y = capitalist_hitbox.xcor(), capitalist_hitbox.ycor()
     capitalist_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
+    capitalist.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
 
 def capitalist_turn_right():
     global capitalist_angle
