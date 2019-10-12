@@ -115,7 +115,7 @@ hud_cap.color("blue")
 hud_cap.penup()
 hud_cap.hideturtle()
 hud_cap.goto(300,262)
-hud_cap.write("{:01d}".format(score_cap), align= "center",
+hud_cap.write("USA {:01d}".format(score_cap), align= "center",
                 font=("Press Start 2P", 30, "normal"))
 
 #score comunista
@@ -127,7 +127,7 @@ hud_com.color("red")
 hud_com.penup()
 hud_com.hideturtle()
 hud_com.goto(-300,262)
-hud_com.write("{:01d}".format(score_com), align= "center",
+hud_com.write("URSS {:01d}".format(score_com), align= "center",
                 font=("Press Start 2P", 30, "normal"))
 
 while playing:
