@@ -1,8 +1,12 @@
 import turtle
+import time
 
 from game_modules import objects, physics, sounds, utils
 
 playing = True
+
+shot = turtle.Turtle()
+shot.hideturtle()
 
 def close_screen():
     global playing
@@ -60,6 +64,19 @@ capitalist_hitbox.dy = 0
 communist_angle = 0
 capitalist_angle = 180
 
+# Tiros do tanque comunista
+
+communist_shot = False
+communist_shot_init = False
+communist_trash_shot = False
+def shot_communist():
+    global communist_shot
+    global communist_shot_init
+    global communist_trash_shot
+    communist_shot = True
+    communist_shot_init = True
+    communist_trash_shot = True
+
 def communist_turn_left():
     global communist_angle
     communist_angle += 22.5
@@ -102,9 +119,35 @@ screen.listen()
 screen.onkeypress(communist_turn_left, "a")
 screen.onkeypress(communist_move, "w")
 screen.onkeypress(communist_turn_right, "d")
+screen.onkeypress(shot_communist, 'z')
 screen.onkeypress(capitalist_turn_left, "Left")
 screen.onkeypress(capitalist_move, "Up")
 screen.onkeypress(capitalist_turn_right, "Right")
 
 while playing:
+
     screen.update()
+
+    # tiro comunista
+    if(communist_shot):
+        if(communist_trash_shot):
+            shot.hideturtle()
+            communist_trash_shot = False
+        if(communist_shot_init):
+            shot = turtle.Turtle()
+            shot.speed(0)
+            shot.shape("circle")
+            shot.color("red")
+            shot.penup()
+            shot.turtlesize(1)
+            shot.setx(communist.xcor())
+            shot.sety(communist.ycor())
+            communist_shot_init = False
+        shot.dx, shot.dy = physics.calculate_angle_shot(communist_angle)
+        if(shot.xcor() < 630 and shot.xcor() > -630 and shot.ycor() < 300 and shot.ycor() > -300):
+            shot.setx(shot.xcor() + shot.dx)
+            shot.sety(shot.ycor() + shot.dy)
+        else:
+            communist_shot = False
+            shot.hideturtle()
+        x+=1
