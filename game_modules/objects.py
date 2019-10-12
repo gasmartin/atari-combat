@@ -13,7 +13,7 @@ def create_hitbox(x, y):
     hitbox.speed(0)
     hitbox.color("orange")
     hitbox.shape("square")
-    hitbox.shapesize(stretch_wid=3, stretch_len=3)
+    hitbox.shapesize(stretch_wid=2, stretch_len=2)
     hitbox.penup()
     hitbox.goto(x, y)
     return hitbox
