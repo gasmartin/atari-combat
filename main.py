@@ -177,10 +177,10 @@ while playing:
         if(communist_shot_init):
             shot1 = turtle.Turtle()
             shot1.speed(0)
-            shot1.shape("circle")
+            shot1.shape("square")
+            shot1.shapesize(stretch_wid=0.1, stretch_len=0.2)
             shot1.color("red")
             shot1.penup()
-            shot1.turtlesize(1)
             shot1.setx(communist.xcor())
             shot1.sety(communist.ycor())
             communist_shot_init = False
@@ -191,6 +191,7 @@ while playing:
         else:
             communist_shot = False
             shot1.hideturtle()
+    
     # tiro capitalista
 
     if(capitalist_shot):
@@ -200,10 +201,10 @@ while playing:
         if(capitalist_shot_init):
             shot2 = turtle.Turtle()
             shot2.speed(0)
-            shot2.shape("circle")
+            shot2.shape("square")
+            shot2.shapesize(stretch_wid=0.1, stretch_len=0.2)
             shot2.color("blue")
             shot2.penup()
-            shot2.turtlesize(1)
             shot2.setx(capitalist.xcor())
             shot2.sety(capitalist.ycor())
             capitalist_shot_init = False
