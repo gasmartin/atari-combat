@@ -1,5 +1,8 @@
 import turtle
 
+ball_speed = 5
+tank_speed = 3
+
 def register_tank_shape(screen, name, color):
     shape = turtle.Shape("compound")
 
