@@ -114,9 +114,9 @@ hud_cap.shape("square")
 hud_cap.color("blue")
 hud_cap.penup()
 hud_cap.hideturtle()
-hud_cap.goto(200,270)
-hud_cap.write("{:02d}".format(score_cap), align= "center",
-                font=("Press Start 2P", 24, "normal"))
+hud_cap.goto(300,262)
+hud_cap.write("{:01d}".format(score_cap), align= "center",
+                font=("Press Start 2P", 30, "normal"))
 
 #score comunista
 score_com = 0
@@ -126,9 +126,9 @@ hud_com.shape("square")
 hud_com.color("red")
 hud_com.penup()
 hud_com.hideturtle()
-hud_com.goto(-200,270)
-hud_com.write("{:02d}".format(score_com), align= "center",
-                font=("Press Start 2P", 24, "normal"))
+hud_com.goto(-300,262)
+hud_com.write("{:01d}".format(score_com), align= "center",
+                font=("Press Start 2P", 30, "normal"))
 
 while playing:
     screen.update()
