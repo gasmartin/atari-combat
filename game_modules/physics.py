@@ -1,7 +1,7 @@
 from math import cos, radians, sin
 
 ball_speed = 5
-tank_speed = 2
+tank_speed = 1
 
 def calculate_angle(turtle, degrees):
     dx = tank_speed * cos(radians(degrees))

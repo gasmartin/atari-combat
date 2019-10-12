@@ -106,26 +106,29 @@ screen.onkeypress(capitalist_turn_left, "Left")
 screen.onkeypress(capitalist_move, "Up")
 screen.onkeypress(capitalist_turn_right, "Right")
 
-#score do jogo
-score_com = 0
+#score capitalista
 score_cap = 0
-hud_com = turtle.Turtle()
 hud_cap = turtle.Turtle()
 hud_cap.speed(0)
-hud_com.speed(0)
-hud_com.shape("square")
 hud_cap.shape("square")
 hud_cap.color("blue")
-hud_com.color("red")
 hud_cap.penup()
-hud_com.penup()
-hud_com.hideturtle()
 hud_cap.hideturtle()
 hud_cap.goto(200,270)
-hud_com.goto(-200,270)
 hud_cap.write("{:02d}".format(score_cap), align= "center",
                 font=("Press Start 2P", 24, "normal"))
+
+#score comunista
+score_com = 0
+hud_com = turtle.Turtle()
+hud_com.speed(0)
+hud_com.shape("square")
+hud_com.color("red")
+hud_com.penup()
+hud_com.hideturtle()
+hud_com.goto(-200,270)
 hud_com.write("{:02d}".format(score_com), align= "center",
                 font=("Press Start 2P", 24, "normal"))
+
 while playing:
     screen.update()
