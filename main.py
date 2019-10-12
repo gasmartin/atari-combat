@@ -124,6 +124,30 @@ screen.onkeypress(capitalist_turn_left, "Left")
 screen.onkeypress(capitalist_move, "Up")
 screen.onkeypress(capitalist_turn_right, "Right")
 
+#score capitalista
+score_cap = 0
+hud_cap = turtle.Turtle()
+hud_cap.speed(0)
+hud_cap.shape("square")
+hud_cap.color("blue")
+hud_cap.penup()
+hud_cap.hideturtle()
+hud_cap.goto(300,262)
+hud_cap.write("USA {:01d}".format(score_cap), align= "center",
+                font=("Press Start 2P", 30, "normal"))
+
+#score comunista
+score_com = 0
+hud_com = turtle.Turtle()
+hud_com.speed(0)
+hud_com.shape("square")
+hud_com.color("red")
+hud_com.penup()
+hud_com.hideturtle()
+hud_com.goto(-300,262)
+hud_com.write("URSS {:01d}".format(score_com), align= "center",
+                font=("Press Start 2P", 30, "normal"))
+
 while playing:
 
     screen.update()
@@ -144,10 +168,9 @@ while playing:
             shot.sety(communist.ycor())
             communist_shot_init = False
         shot.dx, shot.dy = physics.calculate_angle_shot(communist_angle)
-        if(shot.xcor() < 630 and shot.xcor() > -630 and shot.ycor() < 300 and shot.ycor() > -300):
+        if(shot.xcor() < 630 and shot.xcor() > -630 and shot.ycor() < 200 and shot.ycor() > -250):
             shot.setx(shot.xcor() + shot.dx)
             shot.sety(shot.ycor() + shot.dy)
         else:
             communist_shot = False
             shot.hideturtle()
-        x+=1
