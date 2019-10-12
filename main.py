@@ -5,8 +5,11 @@ from game_modules import objects, physics, sounds, utils
 
 playing = True
 
-shot = turtle.Turtle()
-shot.hideturtle()
+shot1 = turtle.Turtle()
+shot1.hideturtle()
+
+shot2 = turtle.Turtle()
+shot2.hideturtle()
 
 def close_screen():
     global playing
@@ -77,6 +80,19 @@ def shot_communist():
     communist_shot_init = True
     communist_trash_shot = True
 
+# Tiros do tanque capitalista
+
+capitalist_shot = False
+capitalist_shot_init = False
+capitalist_trash_shot = False
+def shot_capitalist():
+    global capitalist_shot
+    global capitalist_shot_init
+    global capitalist_trash_shot
+    capitalist_shot = True
+    capitalist_shot_init = True
+    capitalist_trash_shot = True
+
 def communist_turn_left():
     global communist_angle
     communist_angle += 22.5
@@ -120,6 +136,7 @@ screen.onkeypress(communist_turn_left, "a")
 screen.onkeypress(communist_move, "w")
 screen.onkeypress(communist_turn_right, "d")
 screen.onkeypress(shot_communist, 'z')
+screen.onkeypress(shot_capitalist, 'm')
 screen.onkeypress(capitalist_turn_left, "Left")
 screen.onkeypress(capitalist_move, "Up")
 screen.onkeypress(capitalist_turn_right, "Right")
@@ -155,22 +172,45 @@ while playing:
     # tiro comunista
     if(communist_shot):
         if(communist_trash_shot):
-            shot.hideturtle()
+            shot1.hideturtle()
             communist_trash_shot = False
         if(communist_shot_init):
-            shot = turtle.Turtle()
-            shot.speed(0)
-            shot.shape("circle")
-            shot.color("red")
-            shot.penup()
-            shot.turtlesize(1)
-            shot.setx(communist.xcor())
-            shot.sety(communist.ycor())
+            shot1 = turtle.Turtle()
+            shot1.speed(0)
+            shot1.shape("circle")
+            shot1.color("red")
+            shot1.penup()
+            shot1.turtlesize(1)
+            shot1.setx(communist.xcor())
+            shot1.sety(communist.ycor())
             communist_shot_init = False
-        shot.dx, shot.dy = physics.calculate_angle_shot(communist_angle)
-        if(shot.xcor() < 630 and shot.xcor() > -630 and shot.ycor() < 200 and shot.ycor() > -250):
-            shot.setx(shot.xcor() + shot.dx)
-            shot.sety(shot.ycor() + shot.dy)
+        shot1.dx, shot1.dy = physics.calculate_angle_shot(communist_angle)
+        if(shot1.xcor() < 630 and shot1.xcor() > -630 and shot1.ycor() < 200 and shot1.ycor() > -250):
+            shot1.setx(shot1.xcor() + shot1.dx)
+            shot1.sety(shot1.ycor() + shot1.dy)
         else:
             communist_shot = False
-            shot.hideturtle()
+            shot1.hideturtle()
+    # tiro capitalista
+
+    if(capitalist_shot):
+        if(capitalist_trash_shot):
+            shot2.hideturtle()
+            capitalist_trash_shot = False
+        if(capitalist_shot_init):
+            shot2 = turtle.Turtle()
+            shot2.speed(0)
+            shot2.shape("circle")
+            shot2.color("blue")
+            shot2.penup()
+            shot2.turtlesize(1)
+            shot2.setx(capitalist.xcor())
+            shot2.sety(capitalist.ycor())
+            capitalist_shot_init = False
+        shot2.dx, shot2.dy = physics.calculate_angle_shot(capitalist_angle)
+        if(shot2.xcor() < 630 and shot2.xcor() > -630 and shot2.ycor() < 200 and shot2.ycor() > -250):
+            shot2.setx(shot2.xcor() + shot2.dx)
+            shot2.sety(shot2.ycor() + shot2.dy)
+        else:
+            capitalist_shot = False
+            shot2.hideturtle()
