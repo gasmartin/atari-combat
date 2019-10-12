@@ -106,5 +106,21 @@ screen.onkeypress(capitalist_turn_left, "Left")
 screen.onkeypress(capitalist_move, "Up")
 screen.onkeypress(capitalist_turn_right, "Right")
 
+#score do jogo
+score_com = 0
+score_cap = 0
+hud_com = turtle.Turtle()
+hud_cap = turtle.Turtle()
+hud_cap.speed(0)
+hud_com.speed(0)
+hud_com.shape("square")
+hud_cap.shape("square")
+hud_cap.color("blue")
+hud_com.color("red")
+hud_cap.penup()
+hud_com.penup()
+hud_cap.goto(200,280)
+hud_com.goto(-200,280)
+
 while playing:
     screen.update()
