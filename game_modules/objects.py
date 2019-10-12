@@ -1,5 +1,6 @@
 import turtle
 
+
 def create_screen(title, width, height):
     screen = turtle.Screen()
     screen.title(title)
@@ -7,6 +8,7 @@ def create_screen(title, width, height):
     screen.setup(width=width, height=height)
     screen.tracer(0)
     return screen
+
 
 def create_hitbox(x, y):
     hitbox = turtle.Turtle()
@@ -17,6 +19,7 @@ def create_hitbox(x, y):
     hitbox.penup()
     hitbox.goto(x, y)
     return hitbox
+
 
 def create_tank(x, y, shape):
     hitbox = create_hitbox(x, y)
