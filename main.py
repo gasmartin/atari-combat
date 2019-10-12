@@ -30,7 +30,7 @@ arq.close()
 
 #valores iniciais de onde começa a tela, tanto o x quanto o y
 x_ini = -640
-y_ini = 250
+y_ini = 280 #antigo 250
  #variaveis que eu vou manipular pra posicionar as caixinhas
 x = x_ini 
 y = y_ini
@@ -41,13 +41,13 @@ colunas = len(mapa[0])
 
 #criando a lista de caixinhas
 hit_boxes = []
-for i in range(0,90):
-    for j in range(0,130):
+for i in range(0,linhas):
+    for j in range(0,colunas):
         if mapa[i][j] == '0':
             hit_boxes.append(objects.create_hitbox(x,y))
         x += 9.88
     x = x_ini
-    y -= 6.8
+    y -= 7.1 #antigo 6.8
 
 # Criar o shape do tanque comunista
 utils.register_tank_shape(screen, "communist", "red")
@@ -149,7 +149,7 @@ hud_cap.shape("square")
 hud_cap.color("blue")
 hud_cap.penup()
 hud_cap.hideturtle()
-hud_cap.goto(300,262)
+hud_cap.goto(300,292) #antigo 300,262
 hud_cap.write("USA {:01d}".format(score_cap), align= "center",
                 font=("Press Start 2P", 30, "normal"))
 
@@ -161,7 +161,7 @@ hud_com.shape("square")
 hud_com.color("red")
 hud_com.penup()
 hud_com.hideturtle()
-hud_com.goto(-300,262)
+hud_com.goto(-300,292) #antigo -300,262
 hud_com.write("URSS {:01d}".format(score_com), align= "center",
                 font=("Press Start 2P", 30, "normal"))
 
