@@ -131,15 +131,7 @@ def capitalist_turn_right():
     capitalist_hitbox.right(22.5)
     physics.calculate_angle(capitalist_hitbox, utils.tank_speed, capitalist_angle)
 
-screen.listen()
-screen.onkeypress(communist_turn_left, "a")
-screen.onkeypress(communist_move, "w")
-screen.onkeypress(communist_turn_right, "d")
-screen.onkeypress(shot_communist, 'z')
-screen.onkeypress(shot_capitalist, 'm')
-screen.onkeypress(capitalist_turn_left, "Left")
-screen.onkeypress(capitalist_move, "Up")
-screen.onkeypress(capitalist_turn_right, "Right")
+
 
 #score capitalista
 score_cap = 0
@@ -165,10 +157,43 @@ hud_com.goto(-300,292) #antigo -300,262
 hud_com.write("URSS {:01d}".format(score_com), align= "center",
                 font=("Press Start 2P", 30, "normal"))
 
+#mensagem de vitoria
+hud_victory = turtle.Turtle()
+hud_victory.speed(0)
+hud_victory.shape("square")
+hud_victory.color("black")
+hud_victory.penup()
+hud_victory.hideturtle()
+hud_victory.goto(0, 100)
+
+def restart():
+    global score_cap
+    score_cap = 0
+    global score_com
+    score_com = 0
+    hud_cap.clear()
+    hud_com.clear()
+    hud_cap.write("USA {:01d}".format(score_cap), align= "center",
+                font=("Press Start 2P", 30, "normal"))
+    hud_com.write("URSS {:01d}".format(score_com), align= "center",
+                font=("Press Start 2P", 30, "normal"))
+    hud_victory.clear()
+
+screen.listen()
+screen.onkeypress(communist_turn_left, "a")
+screen.onkeypress(communist_move, "w")
+screen.onkeypress(communist_turn_right, "d")
+screen.onkeypress(shot_communist, 'z')
+screen.onkeypress(shot_capitalist, 'm')
+screen.onkeypress(capitalist_turn_left, "Left")
+screen.onkeypress(capitalist_move, "Up")
+screen.onkeypress(capitalist_turn_right, "Right")
+screen.onkeypress(restart, "space")
+
 while playing:
 
     screen.update()
-
+    
     # tiro comunista
     if(communist_shot):
         if(communist_trash_shot):
@@ -215,3 +240,10 @@ while playing:
         else:
             capitalist_shot = False
             shot2.hideturtle()
+
+    #codição de vitória
+    if score_cap == 5 or score_com == 5:
+        winner = 'Capitalist' if score_cap > score_com else 'Communist'
+        score_cap = score_com = 0
+        hud_victory.write("Victory {}\nPress [Space] to restart game.".format(winner), align="center",
+              font=("Press Start 2P", 30, "normal"))
