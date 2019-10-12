@@ -49,7 +49,7 @@ for i in range(0,90):
 # Criar o shape do tanque comunista
 utils.register_tank_shape(screen, "communist", "red")
 
-# Criar o shape do tanque capitalist
+# Criar o shape do tanque capitalista
 utils.register_tank_shape(screen, "capitalist", "blue")
 
 communist, communist_hitbox = objects.create_tank(-520, -100, "communist")
@@ -82,7 +82,7 @@ def communist_turn_left():
     communist_angle += 22.5
     communist.left(22.5)
     communist_hitbox.left(22.5)
-    physics.calculate_angle(communist_hitbox, communist_angle)
+    physics.calculate_angle(communist_hitbox, utils.tank_speed, communist_angle)
 
 def communist_move():
     x, y = communist_hitbox.xcor(), communist_hitbox.ycor()
@@ -94,14 +94,14 @@ def communist_turn_right():
     communist_angle -= 22.5
     communist.right(22.5)
     communist_hitbox.right(22.5)
-    physics.calculate_angle(communist_hitbox, communist_angle)
+    physics.calculate_angle(communist_hitbox, utils.tank_speed, communist_angle)
 
 def capitalist_turn_left():
     global capitalist_angle
     capitalist_angle += 22.5
     capitalist.left(22.5)
     capitalist_hitbox.left(22.5)
-    physics.calculate_angle(capitalist_hitbox, capitalist_angle)
+    physics.calculate_angle(capitalist_hitbox, utils.tank_speed, capitalist_angle)
 
 def capitalist_move():
     x, y = capitalist_hitbox.xcor(), capitalist_hitbox.ycor()
@@ -113,7 +113,7 @@ def capitalist_turn_right():
     capitalist_angle -= 22.5
     capitalist.right(22.5)
     capitalist_hitbox.right(22.5)
-    physics.calculate_angle(capitalist_hitbox, capitalist_angle)
+    physics.calculate_angle(capitalist_hitbox, utils.tank_speed, capitalist_angle)
 
 screen.listen()
 screen.onkeypress(communist_turn_left, "a")
