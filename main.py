@@ -119,8 +119,13 @@ hud_cap.color("blue")
 hud_com.color("red")
 hud_cap.penup()
 hud_com.penup()
-hud_cap.goto(200,280)
-hud_com.goto(-200,280)
-
+hud_com.hideturtle()
+hud_cap.hideturtle()
+hud_cap.goto(200,270)
+hud_com.goto(-200,270)
+hud_cap.write("{:02d}".format(score_cap), align= "center",
+                font=("Press Start 2P", 24, "normal"))
+hud_com.write("{:02d}".format(score_com), align= "center",
+                font=("Press Start 2P", 24, "normal"))
 while playing:
     screen.update()
