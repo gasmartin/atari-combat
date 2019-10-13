@@ -33,7 +33,7 @@ arq.close()
 
 # valores iniciais de onde começa a tela, tanto o x quanto o y
 x_ini = -640
-y_ini = 280  # antigo 250
+y_ini = 280  # antigo 280
 
 # variaveis que eu vou manipular pra posicionar as caixinhas
 x = x_ini
@@ -49,9 +49,9 @@ for i in range(0, linhas):
     for j in range(0, colunas):
         if mapa[i][j] == '0':
             hit_boxes.append(objects.create_hitbox(x, y))
-        x += 9.88
+        x += 19.8 # to colocando um pouco menos que 20 pq senão passa da tela 
     x = x_ini
-    y -= 7.1  # antigo 6.8
+    y -= 14.3  # é quebrado assim pq eu não to pegando a tela toda, to deixando um espaço pro placar
 
 # criar o shape do tanque comunista
 utils.register_tank_shape(screen, "communist", "red")
