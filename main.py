@@ -21,37 +21,11 @@ screen = objects.create_screen("Atari Combat", 1300, 900)
 root = screen.getcanvas().winfo_toplevel()
 root.protocol("WM_DELETE_WINDOW", close_screen)
 
-# leitura do mapa, rlx que eu vou modularizar, queria dar commit logo,
-# quem reclamar vai ter que sair no soco cmg
-arq = open("mapa.txt", "r")
-mapa = []
-linha = arq.readline()
-while(linha):
-    mapa.append(linha.rstrip())
-    linha = arq.readline()
-arq.close()
+# leitura do mapa
+map = utils.map_load()
 
-# valores iniciais de onde começa a tela, tanto o x quanto o y
-x_ini = -640
-y_ini = 280  # antigo 280
-
-# variaveis que eu vou manipular pra posicionar as caixinhas
-x = x_ini
-y = y_ini
-
-# linhas e colunas do mapa
-linhas = len(mapa)
-colunas = len(mapa[0])
-
-# criando a lista de caixinhas
-hit_boxes = []
-for i in range(0, linhas):
-    for j in range(0, colunas):
-        if mapa[i][j] == '0':
-            hit_boxes.append(objects.create_hitbox(x, y))
-        x += 19.8 # to colocando um pouco menos que 20 pq senão passa da tela 
-    x = x_ini
-    y -= 14.3  # é quebrado assim pq eu não to pegando a tela toda, to deixando um espaço pro placar
+# criação do layout do mapa, cada bloquinho do layout vai ficar nessa lista para serem manipulados
+map_hit_boxes = objects.create_map_layout(map)
 
 # criar o shape do tanque comunista
 utils.register_tank_shape(screen, "communist", "red")

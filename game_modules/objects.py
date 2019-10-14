@@ -45,3 +45,28 @@ def create_bullet(x, y, color):
     bullet.penup()
     bullet.goto(x, y)
     return bullet
+
+def create_map_layout(map):
+    # valores iniciais de onde começa a tela, tanto o x quanto o y
+    x_ini = -640
+    y_ini = 280  # antigo 280
+
+    # variaveis que eu vou manipular pra posicionar as caixinhas
+    x = x_ini
+    y = y_ini
+
+    # linhas e colunas do mapa
+    rows = len(map)
+    columns = len(map[0])
+
+    # criando a lista de caixinhas
+    hit_boxes = []
+    for i in range(0, rows):
+        for j in range(0, columns):
+            if map[i][j] == '0':
+                hit_boxes.append(create_hitbox(x, y))
+            x += 19.8 # to colocando um pouco menos que 20 pq senão passa da tela 
+        x = x_ini
+        y -= 14.3  # é quebrado assim pq eu não to pegando a tela toda, to deixando um espaço pro placar
+
+    return hit_boxes
