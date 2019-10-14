@@ -71,34 +71,31 @@ capitalist_hitbox.dy = 0
 communist_angle = 0
 capitalist_angle = 180
 
+communist_bullet = objects.create_bullet(communist.xcor(), communist.ycor(), "red")
+communist_bullet.hideturtle()
+
+capitalist_bullet = objects.create_bullet(capitalist.xcor(), capitalist.ycor(), "blue")
+capitalist_bullet.hideturtle()
+
 # tiros do tanque comunista
 communist_shot = False
-communist_shot_init = False
 communist_trash_shot = False
 
 
 def shot_communist():
     global communist_shot
-    global communist_shot_init
-    global communist_trash_shot
     communist_shot = True
-    communist_shot_init = True
-    communist_trash_shot = True
+    communist_bullet.showturtle()
 
 
 # tiros do tanque capitalista
 capitalist_shot = False
-capitalist_shot_init = False
-capitalist_trash_shot = False
 
 
 def shot_capitalist():
     global capitalist_shot
-    global capitalist_shot_init
-    global capitalist_trash_shot
     capitalist_shot = True
-    capitalist_shot_init = True
-    capitalist_trash_shot = True
+    capitalist_bullet.showturtle()
 
 
 def communist_turn_left():
@@ -215,51 +212,27 @@ while playing:
 
     # tiro comunista
     if(communist_shot):
-        if(communist_trash_shot):
-            shot1.hideturtle()
-            communist_trash_shot = False
-        if(communist_shot_init):
-            shot1 = turtle.Turtle()
-            shot1.speed(0)
-            shot1.shape("square")
-            shot1.shapesize(stretch_wid=0.1, stretch_len=0.2)
-            shot1.color("red")
-            shot1.penup()
-            shot1.setx(communist.xcor())
-            shot1.sety(communist.ycor())
-            communist_shot_init = False
-        shot1.dx, shot1.dy = physics.calculate_angle_shot(communist_angle)
-        if shot1.xcor() < 630 and shot1.xcor() > -630 and \
-                shot1.ycor() < 200 and shot1.ycor() > -250:
-            shot1.setx(shot1.xcor() + shot1.dx)
-            shot1.sety(shot1.ycor() + shot1.dy)
+        physics.calculate_angle(communist_bullet, utils.bullet_speed, communist_angle)
+        if communist_bullet.xcor() < 630 and communist_bullet.xcor() > -630 and \
+                communist_bullet.ycor() < 200 and communist_bullet.ycor() > -250:
+            communist_bullet.setx(communist_bullet.xcor() + communist_bullet.dx)
+            communist_bullet.sety(communist_bullet.ycor() + communist_bullet.dy)
         else:
             communist_shot = False
-            shot1.hideturtle()
+            communist_bullet.goto(communist.xcor(), communist.ycor())
+            communist_bullet.hideturtle()
 
     # tiro capitalista
     if(capitalist_shot):
-        if(capitalist_trash_shot):
-            shot2.hideturtle()
-            capitalist_trash_shot = False
-        if(capitalist_shot_init):
-            shot2 = turtle.Turtle()
-            shot2.speed(0)
-            shot2.shape("square")
-            shot2.shapesize(stretch_wid=0.1, stretch_len=0.2)
-            shot2.color("blue")
-            shot2.penup()
-            shot2.setx(capitalist.xcor())
-            shot2.sety(capitalist.ycor())
-            capitalist_shot_init = False
-        shot2.dx, shot2.dy = physics.calculate_angle_shot(capitalist_angle)
-        if shot2.xcor() < 630 and shot2.xcor() > -630 and \
-                shot2.ycor() < 200 and shot2.ycor() > -250:
-            shot2.setx(shot2.xcor() + shot2.dx)
-            shot2.sety(shot2.ycor() + shot2.dy)
+        physics.calculate_angle(capitalist_bullet, utils.bullet_speed, capitalist_angle)
+        if capitalist_bullet.xcor() < 630 and capitalist_bullet.xcor() > -630 and \
+                capitalist_bullet.ycor() < 200 and capitalist_bullet.ycor() > -250:
+            capitalist_bullet.setx(capitalist_bullet.xcor() + capitalist_bullet.dx)
+            capitalist_bullet.sety(capitalist_bullet.ycor() + capitalist_bullet.dy)
         else:
             capitalist_shot = False
-            shot2.hideturtle()
+            capitalist_bullet.goto(capitalist.xcor(), capitalist.ycor())
+            capitalist_bullet.hideturtle()
 
     # codição de vitória
     if score_cap == 5 or score_com == 5:

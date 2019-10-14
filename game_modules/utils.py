@@ -1,7 +1,7 @@
 import turtle
 
-ball_speed = 5
-tank_speed = 3
+bullet_speed = 10
+tank_speed = 5
 
 
 def register_tank_shape(screen, name, color):

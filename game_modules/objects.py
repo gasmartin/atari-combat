@@ -34,3 +34,14 @@ def create_tank(x, y, shape):
     else:
         tank.right(90)
     return [tank, hitbox]
+
+
+def create_bullet(x, y, color):
+    bullet = turtle.Turtle()
+    bullet.speed(0)
+    bullet.shape("square")
+    bullet.shapesize(stretch_wid=0.5, stretch_len=0.5)
+    bullet.color(color)
+    bullet.penup()
+    bullet.goto(x, y)
+    return bullet

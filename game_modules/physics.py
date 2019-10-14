@@ -10,8 +10,8 @@ def calculate_angle(turtle, speed, degrees):
 
 
 def calculate_angle_shot(degrees):
-    dx = 100 * cos(radians(degrees))
-    dy = 100 * sin(radians(degrees))
+    dx = 10 * cos(radians(degrees))
+    dy = 10 * sin(radians(degrees))
     return [dx, dy]
 
 # Paredes e balas (não mudam de angulo)
