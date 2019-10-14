@@ -9,11 +9,6 @@ def calculate_angle(turtle, speed, degrees):
     turtle.dy = round(dy, 2)
 
 
-def calculate_angle_shot(degrees):
-    dx = 10 * cos(radians(degrees))
-    dy = 10 * sin(radians(degrees))
-    return [dx, dy]
-
 # Paredes e balas (não mudam de angulo)
 def aabb_collision(rect, rect2):
     rx, ry = rect.xcor(), rect.ycor()
