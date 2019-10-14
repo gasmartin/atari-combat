@@ -9,7 +9,6 @@ def calculate_angle(turtle, speed, degrees):
     turtle.dy = round(dy, 2)
 
 
-# Paredes e balas (não mudam de angulo)
 def aabb_collision(rect, rect2):
     rx, ry = rect.xcor(), rect.ycor()
     rx2, ry2 = rect2.xcor(), rect2.ycor()

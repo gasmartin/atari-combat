@@ -53,13 +53,14 @@ capitalist_bullet.hideturtle()
 
 # tiros do tanque comunista
 communist_shot = False
-communist_trash_shot = False
 
 
 def shot_communist():
     global communist_shot
-    communist_shot = True
-    communist_bullet.showturtle()
+    if not communist_shot:
+        communist_shot = True
+        communist_bullet.goto(communist.xcor(), communist.ycor())
+        communist_bullet.showturtle()
 
 
 # tiros do tanque capitalista
@@ -68,15 +69,16 @@ capitalist_shot = False
 
 def shot_capitalist():
     global capitalist_shot
-    capitalist_shot = True
-    capitalist_bullet.showturtle()
+    if not capitalist_shot:
+        capitalist_shot = True
+        capitalist_bullet.goto(capitalist.xcor(), capitalist.ycor())
+        capitalist_bullet.showturtle()
 
 
 def communist_turn_left():
     global communist_angle
     communist_angle += 22.5
     communist.left(22.5)
-    communist_hitbox.left(22.5)
     physics.calculate_angle(communist_hitbox, utils.tank_speed,
                             communist_angle)
 
@@ -91,7 +93,6 @@ def communist_turn_right():
     global communist_angle
     communist_angle -= 22.5
     communist.right(22.5)
-    communist_hitbox.right(22.5)
     physics.calculate_angle(communist_hitbox, utils.tank_speed,
                             communist_angle)
 
@@ -100,7 +101,6 @@ def capitalist_turn_left():
     global capitalist_angle
     capitalist_angle += 22.5
     capitalist.left(22.5)
-    capitalist_hitbox.left(22.5)
     physics.calculate_angle(capitalist_hitbox, utils.tank_speed,
                             capitalist_angle)
 
@@ -115,7 +115,6 @@ def capitalist_turn_right():
     global capitalist_angle
     capitalist_angle -= 22.5
     capitalist.right(22.5)
-    capitalist_hitbox.right(22.5)
     physics.calculate_angle(capitalist_hitbox, utils.tank_speed,
                             capitalist_angle)
 
@@ -153,6 +152,16 @@ hud_victory.penup()
 hud_victory.hideturtle()
 hud_victory.goto(0, 100)
 
+# Atualizar o score do jogo
+def update_score():
+    global score_cap
+    global score_com
+    hud_cap.clear()
+    hud_com.clear()
+    hud_cap.write("USA {:01d}".format(score_cap), align="center",
+                  font=("Press Start 2P", 30, "normal"))
+    hud_com.write("URSS {:01d}".format(score_com), align="center",
+                  font=("Press Start 2P", 30, "normal"))
 
 # reiniciar o jogo
 def restart():
@@ -207,6 +216,21 @@ while playing:
             capitalist_shot = False
             capitalist_bullet.goto(capitalist.xcor(), capitalist.ycor())
             capitalist_bullet.hideturtle()
+
+    
+    if capitalist_bullet.isvisible() and physics.aabb_collision(communist_hitbox, capitalist_bullet):
+        score_cap += 1
+        update_score()
+        capitalist_shot = False
+        capitalist_bullet.goto(capitalist.xcor(), capitalist.ycor())
+        capitalist_bullet.hideturtle()
+
+    if communist_bullet.isvisible() and physics.aabb_collision(capitalist_hitbox, communist_bullet):
+        score_com += 1
+        update_score()
+        communist_shot = False
+        communist_bullet.goto(communist.xcor(), communist.ycor())
+        communist_bullet.hideturtle()
 
     # codição de vitória
     if score_cap == 5 or score_com == 5:
