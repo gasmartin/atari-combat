@@ -79,6 +79,10 @@ def communist_move():
     if physics.aabb_collision(communist_hitbox, capitalist_hitbox):
         communist_hitbox.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
         communist.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
+    for hitbox in map_hit_boxes:
+        if physics.aabb_collision(hitbox, communist_hitbox):
+            communist_hitbox.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
+            communist.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
 
 
 def communist_turn_right():
@@ -104,6 +108,10 @@ def capitalist_move():
     if physics.aabb_collision(capitalist_hitbox, communist_hitbox):
         capitalist_hitbox.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
         capitalist.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
+    for hitbox in map_hit_boxes:
+        if physics.aabb_collision(hitbox, capitalist_hitbox):
+            capitalist_hitbox.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
+            capitalist.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
 
 
 def capitalist_turn_right():
@@ -219,36 +227,6 @@ while playing:
             score_cap += 1
             update_score()
             utils.reset_bullet(capitalist_bullet, capitalist.xcor(), capitalist.ycor())
-
-    '''
-    # tiro comunista
-    if(communist_shot):
-        if communist_bullet.xcor() < 630 and communist_bullet.xcor() > -630 and \
-                communist_bullet.ycor() < 200 and communist_bullet.ycor() > -250:
-            communist_bullet.setx(communist_bullet.xcor() + communist_bullet.dx)
-            communist_bullet.sety(communist_bullet.ycor() + communist_bullet.dy)
-        else:
-            communist_shot = False
-            utils.reset_bullet(communist_bullet, communist.xcor(), communist.ycor())
-
-    # tiro capitalista
-    if(capitalist_shot):
-        physics.calculate_angle(capitalist_bullet, utils.bullet_speed, capitalist_angle)
-        if capitalist_bullet.xcor() < 630 and capitalist_bullet.xcor() > -630 and \
-                capitalist_bullet.ycor() < 200 and capitalist_bullet.ycor() > -250:
-            capitalist_bullet.setx(capitalist_bullet.xcor() + capitalist_bullet.dx)
-            capitalist_bullet.sety(capitalist_bullet.ycor() + capitalist_bullet.dy)
-        else:
-            capitalist_shot = False
-            utils.reset_bullet(capitalist_bullet, capitalist.xcor(), capitalist.ycor())
-
-
-    if capitalist_bullet.isvisible() and physics.aabb_collision(communist_hitbox, capitalist_bullet):
-        score_cap += 1
-        update_score()
-        capitalist_shot = False
-        utils.reset_bullet(capitalist_bullet, capitalist.xcor(), capitalist.ycor())
-    '''
 
     # codição de vitória
     if score_cap == 5 or score_com == 5:
