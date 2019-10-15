@@ -4,13 +4,7 @@ bullet_speed = 10
 tank_speed = 5
 
 def map_load():
-    archive = open("mapa.txt", "r")
-    map = []
-    row = archive.readline()
-    while(row):
-        map.append(row.rstrip())
-        row = archive.readline()
-    archive.close()
+    map = open("mapa.txt").readlines()
     return map
 
 def register_tank_shape(screen, name, color):
