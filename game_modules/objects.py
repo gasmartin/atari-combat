@@ -64,7 +64,9 @@ def create_map_layout(map):
     for i in range(0, rows):
         for j in range(0, columns):
             if map[i][j] == '0':
-                hit_boxes.append(create_hitbox(x, y).shapesize(2,2))
+                hitbox = create_hitbox(x, y)
+                hitbox.shapesize(2, 2)
+                hit_boxes.append(hitbox)
             x += 19.8 # to colocando um pouco menos que 20 pq senão passa da tela 
         x = x_ini
         y -= 14.3  # é quebrado assim pq eu não to pegando a tela toda, to deixando um espaço pro placar

@@ -21,5 +21,7 @@ def aabb_collision(rect, rect2):
     rect2_half_height = rect2_sizes[0] * 10
     rect2_half_width = rect2_sizes[1] * 10
 
-    return rx < rx2 + rect2_half_width and rx + rect_half_width > rx2 \
-            and ry < ry2 + rect2_half_height and ry + rect_half_height > ry2
+    return rx - rect_half_width < rx2 + rect2_half_width \
+            and rx + rect_half_width > rx2 - rect2_half_width \
+            and ry - rect_half_height < ry2 + rect2_half_height \
+            and ry + rect_half_height > ry2 - rect2_half_height

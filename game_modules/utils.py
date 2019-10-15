@@ -44,3 +44,7 @@ def register_tank_shape(screen, name, color):
     shape.addcomponent(tank.get_poly(), color)
 
     screen.register_shape(name, shape)
+
+def reset_bullet(bullet, x, y):
+    bullet.goto(x, y)
+    bullet.hideturtle() 
