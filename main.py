@@ -74,15 +74,21 @@ def communist_turn_left():
 
 def communist_move():
     x, y = communist_hitbox.xcor(), communist_hitbox.ycor()
-    communist_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
-    communist.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
-    if physics.aabb_collision(communist_hitbox, capitalist_hitbox):
-        communist_hitbox.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
-        communist.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
+
+    communist_will_collide = False
+
+    communist_next_hitbox = communist_hitbox.clone()
+    communist_next_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
+
+    communist_will_collide |= physics.aabb_collision(communist_next_hitbox, capitalist_hitbox)
     for hitbox in map_hit_boxes:
-        if physics.aabb_collision(hitbox, communist_hitbox):
-            communist_hitbox.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
-            communist.goto(x - communist_hitbox.dx, y - communist_hitbox.dy)
+        communist_will_collide |= physics.aabb_collision(hitbox, communist_next_hitbox)
+
+    if not communist_will_collide:
+        communist_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
+        communist.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
+    else:
+        del communist_next_hitbox
 
 
 def communist_turn_right():
@@ -103,15 +109,21 @@ def capitalist_turn_left():
 
 def capitalist_move():
     x, y = capitalist_hitbox.xcor(), capitalist_hitbox.ycor()
-    capitalist_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
-    capitalist.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
-    if physics.aabb_collision(capitalist_hitbox, communist_hitbox):
-        capitalist_hitbox.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
-        capitalist.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
+
+    capitalist_will_collide = False
+
+    capitalist_next_hitbox = capitalist_hitbox.clone()
+    capitalist_next_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
+
+    capitalist_will_collide |= physics.aabb_collision(capitalist_next_hitbox, communist_hitbox)
     for hitbox in map_hit_boxes:
-        if physics.aabb_collision(hitbox, capitalist_hitbox):
-            capitalist_hitbox.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
-            capitalist.goto(x - capitalist_hitbox.dx, y - capitalist_hitbox.dy)
+        capitalist_will_collide |= physics.aabb_collision(hitbox, capitalist_next_hitbox)
+        
+    if not capitalist_will_collide:
+        capitalist_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
+        capitalist.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
+    else:
+        del capitalist_next_hitbox
 
 
 def capitalist_turn_right():
