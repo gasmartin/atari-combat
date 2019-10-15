@@ -12,6 +12,6 @@
 ## Preview do Game:
 
 <p align="center">
-  <img src="game_modules/preview.png" width="350" title="Imagem de gameplay">
+  <img src="assets/preview.png" width="350" title="Imagem de gameplay">
 </p>
 
