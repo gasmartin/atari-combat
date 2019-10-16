@@ -46,6 +46,7 @@ def create_bullet(x, y, color):
     bullet.goto(x, y)
     return bullet
 
+
 def create_map_layout(map):
     # valores iniciais de onde começa a tela, tanto o x quanto o y
     x_ini = -640
@@ -67,8 +68,10 @@ def create_map_layout(map):
                 hitbox = create_hitbox(x, y)
                 hitbox.shapesize(2, 2)
                 hit_boxes.append(hitbox)
-            x += 19.8 # to colocando um pouco menos que 20 pq senão passa da tela 
+            x += 19.8  # to colocando um pouco menos que 20
+            # pq senão passa da tela
         x = x_ini
-        y -= 14.3  # é quebrado assim pq eu não to pegando a tela toda, to deixando um espaço pro placar
+        y -= 14.3  # é quebrado assim pq eu não to pegando a
+        # tela toda, to deixando um espaço pro placar
 
     return hit_boxes

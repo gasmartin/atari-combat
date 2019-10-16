@@ -3,9 +3,11 @@ import turtle
 bullet_speed = 10
 tank_speed = 5
 
+
 def map_load():
     map = open("mapa.txt").readlines()
     return map
+
 
 def register_tank_shape(screen, name, color):
     shape = turtle.Shape("compound")
@@ -39,6 +41,7 @@ def register_tank_shape(screen, name, color):
 
     screen.register_shape(name, shape)
 
+
 def reset_bullet(bullet, x, y):
     bullet.goto(x, y)
-    bullet.hideturtle() 
+    bullet.hideturtle()

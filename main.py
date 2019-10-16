@@ -24,7 +24,8 @@ root.protocol("WM_DELETE_WINDOW", close_screen)
 # leitura do mapa
 map = utils.map_load()
 
-# criação do layout do mapa, cada bloquinho do layout vai ficar nessa lista para serem manipulados
+# criação do layout do mapa, cada bloquinho do
+# layout vai ficar nessa lista para serem manipulados
 map_hit_boxes = objects.create_map_layout(map)
 
 # criar o shape do tanque comunista
@@ -44,10 +45,12 @@ capitalist_hitbox.dy = 0
 communist_angle = 0
 capitalist_angle = 180
 
-communist_bullet = objects.create_bullet(communist.xcor(), communist.ycor(), "red")
+communist_bullet = objects.create_bullet(communist.xcor(),
+                                         communist.ycor(), "red")
 communist_bullet.hideturtle()
 
-capitalist_bullet = objects.create_bullet(capitalist.xcor(), capitalist.ycor(), "blue")
+capitalist_bullet = objects.create_bullet(capitalist.xcor(),
+                                          capitalist.ycor(), "blue")
 capitalist_bullet.hideturtle()
 
 
@@ -77,11 +80,14 @@ def communist_move():
     communist_will_collide = False
 
     communist_next_hitbox = communist_hitbox.clone()
-    communist_next_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
+    communist_next_hitbox.goto(x + communist_hitbox.dx, y +
+                               communist_hitbox.dy)
 
-    communist_will_collide |= physics.aabb_collision(communist_next_hitbox, capitalist_hitbox)
+    communist_will_collide |= physics.aabb_collision(communist_next_hitbox,
+                                                     capitalist_hitbox)
     for hitbox in map_hit_boxes:
-        communist_will_collide |= physics.aabb_collision(hitbox, communist_next_hitbox)
+        communist_will_collide |= physics.aabb_collision(hitbox,
+                                                         communist_next_hitbox)
 
     if not communist_will_collide:
         communist_hitbox.goto(x + communist_hitbox.dx, y + communist_hitbox.dy)
@@ -112,14 +118,18 @@ def capitalist_move():
     capitalist_will_collide = False
 
     capitalist_next_hitbox = capitalist_hitbox.clone()
-    capitalist_next_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
+    capitalist_next_hitbox.goto(x + capitalist_hitbox.dx, y +
+                                capitalist_hitbox.dy)
 
-    capitalist_will_collide |= physics.aabb_collision(capitalist_next_hitbox, communist_hitbox)
+    capitalist_will_collide |= physics.aabb_collision(capitalist_next_hitbox,
+                                                      communist_hitbox)
     for hitbox in map_hit_boxes:
-        capitalist_will_collide |= physics.aabb_collision(hitbox, capitalist_next_hitbox)
-        
+        capitalist_will_collide |= physics.aabb_collision(
+                                   hitbox, capitalist_next_hitbox)
+
     if not capitalist_will_collide:
-        capitalist_hitbox.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
+        capitalist_hitbox.goto(x + capitalist_hitbox.dx, y +
+                               capitalist_hitbox.dy)
         capitalist.goto(x + capitalist_hitbox.dx, y + capitalist_hitbox.dy)
     else:
         del capitalist_next_hitbox
@@ -215,33 +225,40 @@ while playing:
     if communist_bullet.isvisible():
         x, y = communist_bullet.xcor(), communist_bullet.ycor()
 
-        physics.calculate_angle(communist_bullet, utils.bullet_speed, communist_angle)
+        physics.calculate_angle(communist_bullet, utils.bullet_speed,
+                                communist_angle)
         communist_bullet.goto(x + communist_bullet.dx, y + communist_bullet.dy)
 
         for hitbox in map_hit_boxes:
             if physics.aabb_collision(hitbox, communist_bullet):
-                utils.reset_bullet(communist_bullet, communist.xcor(), communist.ycor())
+                utils.reset_bullet(communist_bullet, communist.xcor(),
+                                   communist.ycor())
 
         if physics.aabb_collision(capitalist_hitbox, communist_bullet):
             score_com += 1
             update_score()
-            utils.reset_bullet(communist_bullet, communist.xcor(), communist.ycor())
+            utils.reset_bullet(communist_bullet, communist.xcor(),
+                               communist.ycor())
 
     # Lógica do tiro capitalista
     if capitalist_bullet.isvisible():
         x, y = capitalist_bullet.xcor(), capitalist_bullet.ycor()
 
-        physics.calculate_angle(capitalist_bullet, utils.bullet_speed, capitalist_angle)
-        capitalist_bullet.goto(x + capitalist_bullet.dx, y + capitalist_bullet.dy)
+        physics.calculate_angle(capitalist_bullet, utils.bullet_speed,
+                                capitalist_angle)
+        capitalist_bullet.goto(x + capitalist_bullet.dx, y +
+                               capitalist_bullet.dy)
 
         for hitbox in map_hit_boxes:
             if physics.aabb_collision(hitbox, capitalist_bullet):
-                utils.reset_bullet(capitalist_bullet, capitalist.xcor(), capitalist.ycor())
-                
+                utils.reset_bullet(capitalist_bullet, capitalist.xcor(),
+                                   capitalist.ycor())
+
         if physics.aabb_collision(communist_hitbox, capitalist_bullet):
             score_cap += 1
             update_score()
-            utils.reset_bullet(capitalist_bullet, capitalist.xcor(), capitalist.ycor())
+            utils.reset_bullet(capitalist_bullet, capitalist.xcor(),
+                               capitalist.ycor())
 
     # codição de vitória
     if score_cap == 5 or score_com == 5:
