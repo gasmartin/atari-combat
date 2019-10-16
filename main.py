@@ -5,19 +5,12 @@ from game_modules import objects, physics, sounds, utils
 
 playing = True
 
-shot1 = turtle.Turtle()
-shot1.hideturtle()
-
-shot2 = turtle.Turtle()
-shot2.hideturtle()
-
-
 def close_screen():
     global playing
     playing = False
 
 
-screen = objects.create_screen("Atari Combat", 1300, 900)
+screen = objects.create_screen("Atari Combat", utils.SCREEN_WIDTH, utils.SCREEN_HEIGHT)
 root = screen.getcanvas().winfo_toplevel()
 root.protocol("WM_DELETE_WINDOW", close_screen)
 
@@ -28,12 +21,12 @@ map = utils.map_load()
 # layout vai ficar nessa lista para serem manipulados
 map_hit_boxes = objects.create_map_layout(map)
 
-# criar o shape do tanque comunista
+# criação o shape do tanque comunista
 utils.register_tank_shape(screen, "communist", "red")
-# criar o shape do tanque capitalista
+# criação o shape do tanque capitalista
 utils.register_tank_shape(screen, "capitalist", "blue")
 
-communist, communist_hitbox = objects.create_tank(-520, -100, "communist")
+communist, communist_hitbox = objects.create_tank(-520, 210, "communist")
 capitalist, capitalist_hitbox = objects.create_tank(520, -100, "capitalist")
 
 communist_hitbox.dx = 5
@@ -44,6 +37,28 @@ capitalist_hitbox.dy = 0
 
 communist_angle = 0
 capitalist_angle = 180
+
+def random_spawn(tank, tank_hitbox, side, spinning = False):
+    if side == "left":
+        x_min, x_max = -650, 0
+    else:
+        x_min, x_max = 0, 650
+
+    tank_is_colliding = True
+
+    while tank_is_colliding:
+        tank_hitbox.goto(utils.generate_random_location(x_min, x_max))
+
+        tank_is_colliding = False
+
+        for hitbox in map_hit_boxes:
+            tank_is_colliding |= physics.aabb_collision(hitbox,
+                                                            tank_hitbox)
+
+    tank.goto(tank_hitbox.xcor(), tank_hitbox.ycor())
+
+random_spawn(communist, communist_hitbox, "left")
+random_spawn(capitalist, capitalist_hitbox, "right")
 
 communist_bullet = objects.create_bullet(communist.xcor(),
                                          communist.ycor(), "red")
@@ -144,7 +159,7 @@ def capitalist_turn_right():
 
 
 # score capitalista
-score_cap = 5
+score_cap = 0
 hud_cap = turtle.Turtle()
 hud_cap.speed(0)
 hud_cap.shape("square")
@@ -196,10 +211,8 @@ def restart():
     global score_com
     score_com = 0
 
-    communist.goto(-520, -100)
-    communist_hitbox.goto(-520, -100)
-    capitalist.goto(520, -100)
-    capitalist_hitbox.goto(520, -100)
+    random_spawn(communist, communist_hitbox, "left")
+    random_spawn(capitalist, capitalist_hitbox, "right")
 
     update_score()
 

@@ -1,8 +1,11 @@
+from random import randint
 import turtle
 
 bullet_speed = 10
 tank_speed = 5
 
+SCREEN_WIDTH = 1300 
+SCREEN_HEIGHT = 800
 
 def map_load():
     map = open("mapa.txt").readlines()
@@ -41,6 +44,12 @@ def register_tank_shape(screen, name, color):
 
     screen.register_shape(name, shape)
 
+def generate_random_location(x_min, x_max):
+    x_min = x_min + 30
+    x_max = x_max - 30
+    y_min = -280
+    y_max = 210
+    return (randint(x_min, x_max), randint(y_min, y_max))
 
 def reset_bullet(bullet, x, y):
     bullet.goto(x, y)
