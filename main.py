@@ -56,16 +56,12 @@ capitalist_bullet.hideturtle()
 
 def shot_communist():
     if not communist_bullet.isvisible():
-        physics.calculate_angle(communist_bullet, utils.bullet_speed,
-                                communist_angle)
         communist_bullet.goto(communist.xcor(), communist.ycor())
         communist_bullet.showturtle()
 
 
 def shot_capitalist():
     if not capitalist_bullet.isvisible():
-        physics.calculate_angle(capitalist_bullet, utils.bullet_speed,
-                                capitalist_angle)
         capitalist_bullet.goto(capitalist.xcor(), capitalist.ycor())
         capitalist_bullet.showturtle()
 
@@ -228,6 +224,8 @@ while playing:
     # Lógica do tiro comunista
     if communist_bullet.isvisible():
         x, y = communist_bullet.xcor(), communist_bullet.ycor()
+        physics.calculate_angle(communist_bullet, utils.bullet_speed,
+                                communist_angle)
         communist_bullet.goto(x + communist_bullet.dx, y + communist_bullet.dy)
 
         for hitbox in map_hit_boxes:
@@ -244,6 +242,8 @@ while playing:
     # Lógica do tiro capitalista
     if capitalist_bullet.isvisible():
         x, y = capitalist_bullet.xcor(), capitalist_bullet.ycor()
+        physics.calculate_angle(capitalist_bullet, utils.bullet_speed,
+                                capitalist_angle)
         capitalist_bullet.goto(x + capitalist_bullet.dx, y +
                                capitalist_bullet.dy)
 
