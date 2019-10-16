@@ -29,7 +29,6 @@ map_hit_boxes = objects.create_map_layout(map)
 
 # criar o shape do tanque comunista
 utils.register_tank_shape(screen, "communist", "red")
-
 # criar o shape do tanque capitalista
 utils.register_tank_shape(screen, "capitalist", "blue")
 
@@ -135,7 +134,7 @@ def capitalist_turn_right():
 
 
 # score capitalista
-score_cap = 0
+score_cap = 5
 hud_cap = turtle.Turtle()
 hud_cap.speed(0)
 hud_cap.shape("square")
@@ -162,10 +161,11 @@ hud_com.write("URSS {:01d}".format(score_com), align="center",
 hud_victory = turtle.Turtle()
 hud_victory.speed(0)
 hud_victory.shape("square")
-hud_victory.color("black")
+hud_victory.color("black", "red")
 hud_victory.penup()
 hud_victory.hideturtle()
-hud_victory.goto(0, 100)
+hud_victory.goto(0, -5)
+
 
 # Atualizar o score do jogo
 def update_score():
@@ -178,18 +178,21 @@ def update_score():
     hud_com.write("URSS {:01d}".format(score_com), align="center",
                   font=("Press Start 2P", 30, "normal"))
 
+
 # reiniciar o jogo
 def restart():
     global score_cap
     score_cap = 0
     global score_com
     score_com = 0
-    hud_cap.clear()
-    hud_com.clear()
-    hud_cap.write("USA {:01d}".format(score_cap), align="center",
-                  font=("Press Start 2P", 30, "normal"))
-    hud_com.write("URSS {:01d}".format(score_com), align="center",
-                  font=("Press Start 2P", 30, "normal"))
+
+    communist.goto(-520, -100)
+    communist_hitbox.goto(-520, -100)
+    capitalist.goto(520, -100)
+    capitalist_hitbox.goto(520, -100)
+
+    update_score()
+
     hud_victory.clear()
 
 
@@ -202,7 +205,7 @@ screen.onkeypress(capitalist_turn_left, "j")
 screen.onkeypress(capitalist_move, "i")
 screen.onkeypress(capitalist_turn_right, "l")
 screen.onkeypress(shot_capitalist, 'n')
-screen.onkeypress(restart, "space")
+
 
 while playing:
 
@@ -242,8 +245,9 @@ while playing:
 
     # codição de vitória
     if score_cap == 5 or score_com == 5:
+        screen.ontimer(restart, 4000)
         winner = 'Capitalist' if score_cap > score_com else 'Communist'
         score_cap = score_com = 0
         hud_victory.write(
-            "Victory {}\nPress [Space] to restart game.".format(winner),
+            "Victory {}\nAguarde o jogo será reiniciado.".format(winner),
             align="center", font=("Press Start 2P", 30, "normal"))
