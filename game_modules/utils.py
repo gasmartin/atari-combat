@@ -7,8 +7,8 @@ tank_speed = 5
 SCREEN_WIDTH = 1300 
 SCREEN_HEIGHT = 800
 
-def map_load():
-    map = open("mapa.txt").readlines()
+def map_load(map_name):
+    map = open(map_name).readlines()
     return map
 
 
@@ -54,3 +54,6 @@ def generate_random_location(x_min, x_max):
 def reset_bullet(bullet, x, y):
     bullet.goto(x, y)
     bullet.hideturtle()
+
+def error():
+    print("Azedou irmão, tu fez foi alguma merda ai, shutting down bitch")
