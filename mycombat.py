@@ -256,6 +256,7 @@ if len(params) == 2:
                     update_score()
                     utils.reset_bullet(communist_bullet, communist.xcor(),
                                     communist.ycor())
+                    random_spawn(capitalist, capitalist_hitbox, "right")
 
             # Lógica do tiro capitalista
             if capitalist_bullet.isvisible():
@@ -275,15 +276,18 @@ if len(params) == 2:
                     update_score()
                     utils.reset_bullet(capitalist_bullet, capitalist.xcor(),
                                     capitalist.ycor())
+                    random_spawn(communist, communist_hitbox, "left")
 
             # codição de vitória
             if score_cap == 5 or score_com == 5:
-                screen.ontimer(restart, 4000)
+                # screen.ontimer(restart, 4000)
                 winner = 'Capitalist' if score_cap > score_com else 'Communist'
                 score_cap = score_com = 0
                 hud_victory.write(
                     "Victory {}\nAguarde o jogo será reiniciado.".format(winner),
                     align="center", font=("Press Start 2P", 30, "normal"))
+                time.sleep(4)
+                restart()
       
     except Exception:
         print("Error")
