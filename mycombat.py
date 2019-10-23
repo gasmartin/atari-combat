@@ -227,11 +227,11 @@ if len(params) == 2:
         screen.onkeypress(communist_turn_left, "a")
         screen.onkeypress(communist_move, "w")
         screen.onkeypress(communist_turn_right, "d")
-        screen.onkeypress(shot_communist, 'c')
-        screen.onkeypress(capitalist_turn_left, "j")
-        screen.onkeypress(capitalist_move, "i")
-        screen.onkeypress(capitalist_turn_right, "l")
-        screen.onkeypress(shot_capitalist, 'n')
+        screen.onkeypress(shot_communist, 's')
+        screen.onkeypress(capitalist_turn_left, "Left")
+        screen.onkeypress(capitalist_move, "Up")
+        screen.onkeypress(capitalist_turn_right, "Right")
+        screen.onkeypress(shot_capitalist, 'Down')
 
 
         while playing:

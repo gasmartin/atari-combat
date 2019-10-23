@@ -2,7 +2,7 @@ from random import randint
 import turtle
 
 bullet_speed = 10
-tank_speed = 5
+tank_speed = 15
 
 SCREEN_WIDTH = 1300 
 SCREEN_HEIGHT = 750
