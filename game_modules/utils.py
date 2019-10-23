@@ -5,7 +5,7 @@ bullet_speed = 10
 tank_speed = 5
 
 SCREEN_WIDTH = 1300 
-SCREEN_HEIGHT = 800
+SCREEN_HEIGHT = 750
 
 def map_load(map_name):
     map = open(map_name).readlines()

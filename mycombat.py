@@ -59,7 +59,6 @@ if len(params) == 2:
                 for hitbox in map_hit_boxes:
                     tank_is_colliding |= physics.aabb_collision(hitbox,
                                                                     tank_hitbox)
-
             tank.goto(tank_hitbox.xcor(), tank_hitbox.ycor())
 
         random_spawn(communist, communist_hitbox, "left")
@@ -171,7 +170,7 @@ if len(params) == 2:
         hud_cap.color("blue")
         hud_cap.penup()
         hud_cap.hideturtle()
-        hud_cap.goto(300, 292)  # antigo 300,262
+        hud_cap.goto(300, 305)  # antigo 300,262
         hud_cap.write("USA {:01d}".format(score_cap), align="center",
                     font=("Press Start 2P", 30, "normal"))
 
@@ -183,7 +182,7 @@ if len(params) == 2:
         hud_com.color("red")
         hud_com.penup()
         hud_com.hideturtle()
-        hud_com.goto(-300, 292)  # antigo -300,262
+        hud_com.goto(-300, 305)  # antigo -300,262
         hud_com.write("URSS {:01d}".format(score_com), align="center",
                     font=("Press Start 2P", 30, "normal"))
 
