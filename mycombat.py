@@ -276,6 +276,12 @@ if len(params) == 2:
                     utils.reset_bullet(capitalist_bullet, capitalist.xcor(),
                                     capitalist.ycor())
                     random_spawn(communist, communist_hitbox, "left")
+            
+            if physics.aabb_collision(communist_bullet, capitalist_bullet):
+                utils.reset_bullet(communist_bullet, communist.xcor(),
+                                        communist.ycor())
+                utils.reset_bullet(capitalist_bullet, capitalist.xcor(),
+                                        capitalist.ycor())
 
             # codição de vitória
             if score_cap == 5 or score_com == 5:
